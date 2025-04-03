@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Film>
+@{
+    ViewData["Title"] = "Kategoria " + Model.FirstOrDefault().Category.Name;
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tytuł filmu</th>
+            <th>Reżyser</th>
+            <th>Opis</th>
+            <th>Cena</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var film in Model)
+        {
+            <tr>
+            <td>@film.Title</td>
+            <td>@film.Director</td>
+            <td>@film.Desc</td>
+            <td>@film.Price zł</td>
+            <td><a href="@Url.Action("Details", "Films", new { filmId = film.FilmId })">🔍</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
