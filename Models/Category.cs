@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace UKW_sklep.czw.Models
 {
@@ -6,10 +7,12 @@ namespace UKW_sklep.czw.Models
     {
         [Key]
         public required int Id_Category  { get; set; }
-        [Required(ErrorMessage = "Dodaj pole")]
+        [Required(ErrorMessage = "Wpisz nazwę")]
         public required string Name { get; set; }
-         public required string Desc { get; set; }
+        [StringLength(600, ErrorMessage = "Przekroczony limit znaków")]
+        public required string Desc { get; set; }
   
-        public  int? Id_Id_Film  { get; set; }
+     
+        public ICollection<Film> Films { get; set; }
     }
 }

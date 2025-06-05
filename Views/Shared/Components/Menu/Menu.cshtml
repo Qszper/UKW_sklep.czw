@@ -1,6 +1,42 @@
-﻿namespace UKW_sklep.czw.Views.Shared.Components.Menu
-{
-    public class Menu
-    {
-    }
-}
+﻿@model IEnumerable<Category>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            @foreach (var category in Model)
+            {
+                <li class="nav-item">
+                    <a class="nav-link active" href="@Url.Action("FilmsList","Films", new {categoryName=@category.Name})">@category.Name</a>
+                </li>
+            }
+            <li>
+                <a class="btn btn-danger" href="@Url.Action("AllFilms", "Films")">Wszystkie</a>
+            </li>
+            <li>
+                <a class="btn btn-success" href="@Url.Action("AddFilm", "Films")">Dodaj nowy film</a>
+            </li>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li>
+                    <a class="btn btn-success" href="@Url.Action("Logout", "Acoount")">Wyloguj</a>
+                </li>
+            }
+            else
+            {
+
+                <li>
+                    <a class="btn btn-success" href="@Url.Action("Register", "Acoount")">Register</a>
+                </li>
+                <li>
+                    <a class="btn btn-success" href="@Url.Action("Login", "Acoount")">Login</a>
+                </li>
+
+            }
+
+
+
+
+        </ul>
+    </div>
+</nav>
